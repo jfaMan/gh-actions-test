@@ -5,13 +5,15 @@ on:
       - opened
       - reopened
       - synchronize
+    branches:
+      - 'main'
 jobs:
   check-branches:
     runs-on: ubuntu-latest
     steps:
       - name: Check branches
         run: |
-          if [ ${{ github.head_ref }} != "staging" ] && [ ${{ github.base_ref }} == "main" ]; then
+          if [ ${{ github.head_ref }} != "staging" ]; then
             echo "Pull requests to main branch (production) are only allowed from staging branch. Change source branch to staging."
             exit 1
           fi
