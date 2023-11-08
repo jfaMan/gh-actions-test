@@ -7,11 +7,21 @@ jobs:
       - name: List Files
         run: |
           pwd
-          ls
+          ls -a
+
+      - name: Checkout
+        uses: actions/checkout
+
+      - name: List Files After Checkout
+        run: |
+          pwd
+          ls -a
+
       - name: Simple Javascript Action
         id: hello
         uses: actions/hello-world-javascript-action@v1
         with:
           who-to-greet: Allan
+
       - name: Get the output time
         run: echo "${{ steps.hello.outputs.time }}"
