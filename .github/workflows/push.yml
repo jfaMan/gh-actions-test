@@ -12,10 +12,10 @@ jobs:
           echo $GITHUB_REPOSITORY
           echo $GITHUB_WORKSPACE
           echo "${{ github.token }}"
-          echo "${{ secrets.HOST_DNS }}
-          echo "${{ secrets.EC2_SSH_KEY }}
-          echo "${{ secrets.HOST_DNS }}
-          echo "${{ secrets.PORT }}
+          echo "${{ secrets.HOST_DNS }}"
+          echo "${{ secrets.EC2_SSH_KEY }}"
+          echo "${{ secrets.HOST_DNS }}"
+          echo "${{ secrets.PORT }}"
 
       - name: Checkout
         uses: actions/checkout@v1
