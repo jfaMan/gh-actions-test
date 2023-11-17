@@ -19,7 +19,7 @@ jobs:
       - name: Checkout fusionauth-appsembler-theme
         uses: actions/checkout@v4
         with:
-          repository: jfaMan/fusionauth-theme-files-backup
+          repository: jfaMan/fusionauth-theme-files-backup # original = ${{ "github.repository
           token: ${{ vars.MY_PAT }}
           path: tmp
 
@@ -33,6 +33,14 @@ jobs:
           TMP_DIR=tmp
 
           EOF
+
+      - name: Add Node JS v20.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: "20.x"
+
+      - name: Run NPM
+        run: npm install
 
       - name: Display copied files
         run: |
