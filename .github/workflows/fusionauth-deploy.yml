@@ -18,3 +18,4 @@ jobs:
           pwd
           ls -a  # Display copied files (optional)
           echo 'hello'
+          echo 'bye'
