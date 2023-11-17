@@ -27,11 +27,15 @@ jobs:
       
       - name: Add environmental variables
         run: |
-          cat > .env << 'EOL'
-          Line 1
-          Line 2
-          Line 3
-          EOL 
+          cat << EOF > .env
+
+          API_KEY=${{ env.API_KEY }}
+          THEME_ID=35c14b9c-4c25-4a10-884e-60cfd5486968
+          FUSIONAUTH_URL=http://localhost:9011/
+          TMP_DIR=tmp
+
+          
+          EOF
 
 
       - name: Display copied files
