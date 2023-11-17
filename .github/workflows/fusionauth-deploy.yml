@@ -12,19 +12,20 @@ jobs:
         with:
           repository: FusionAuth/fusionauth-theme-helper
           ref: 195b41772db95eb082853ea3211950e8c44d5397  # specific commit hash to ensure consistency
+      
+      - name: Create 'tmp' directory for theme files
+        run: mkdir tmp
+
+      - name: Checkout fusionauth-appsembler-theme
+        uses: actions/checkout@4
+        with:
+          repository: ${{ github.repository }}
+          path: tmp
 
       - name: Display copied files
         run: |
           pwd
-          ls -a  # Display copied files (optional)
-          echo 'hello'
-          echo 'bye'
-
-      - name: Create 'tmp' directory
-        run: mkdir tmp
-
-      - name: Display contents
-        run: |
-          pwd
           ls -a
-          echo 'finished'
+          echo '**************'
+          ls -a tmp
+          echo '--FINISHED--'
