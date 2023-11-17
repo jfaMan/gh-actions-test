@@ -35,6 +35,7 @@ jobs:
 
       - name: Display copied files
         run: |
+          echo "$env.API_KEY"
           pwd
           ls -a
           echo '**************'
