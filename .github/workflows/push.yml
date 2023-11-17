@@ -37,11 +37,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           repository: FusionAuth/fusionauth-theme-helper
-          ref: main  # Modify this according to your branch name
+          ref: 195b41772db95eb082853ea3211950e8c44d5397  # Modify this according to your branch name
 
       - name: Display copied files
         run: |
           ls -a  # Display copied files (optional)
+          echo 'hello'
