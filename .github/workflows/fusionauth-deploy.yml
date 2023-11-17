@@ -27,7 +27,7 @@ jobs:
       
       - name: Add environmental variables
         run: |
-          cat > file.txt << 'EOL'
+          cat > .env << 'EOL'
           Line 1
           Line 2
           Line 3
