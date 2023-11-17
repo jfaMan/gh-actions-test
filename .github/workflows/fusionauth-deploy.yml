@@ -1,6 +1,11 @@
-name: FusionAuth Deployment
+name: FusionAuth Staging Deployment
 
-on: push
+on:
+  pull_request:
+    branches:
+      - staging
+    types:
+      - closed
 
 jobs:
   deploy-staging:
@@ -41,15 +46,6 @@ jobs:
 
       - name: Run NPM
         run: npm install
-
-      - name: Display copied files
-        run: |
-          pwd
-          ls -a
-          echo '**************'
-          ls -a tmp
-          echo '--FINISHED--'
-          cat .env
 
       - name: Run FusionAuth Theme Helper and upload theme files to FusionAuth staging
         run: ./upload.sh
