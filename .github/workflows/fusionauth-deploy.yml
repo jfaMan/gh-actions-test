@@ -21,6 +21,18 @@ jobs:
         with:
           repository: ${{ github.repository }}
           path: tmp
+      
+      # - name: Create .env file
+      #   run: touch .env
+      
+      - name: Add environmental variables
+        run: |
+          cat > file.txt << 'EOL'
+          Line 1
+          Line 2
+          Line 3
+          EOL 
+
 
       - name: Display copied files
         run: |
@@ -29,3 +41,4 @@ jobs:
           echo '**************'
           ls -a tmp
           echo '--FINISHED--'
+          cat .env
