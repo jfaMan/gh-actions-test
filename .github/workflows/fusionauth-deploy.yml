@@ -50,3 +50,6 @@ jobs:
           ls -a tmp
           echo '--FINISHED--'
           cat .env
+
+      - name: Run FusionAuth Theme Helper and upload theme files to FusionAuth staging
+        run: ./upload.sh
