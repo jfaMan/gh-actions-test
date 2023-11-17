@@ -21,22 +21,17 @@ jobs:
         with:
           repository: ${{ github.repository }}
           path: tmp
-      
-      # - name: Create .env file
-      #   run: touch .env
-      
+
       - name: Add environmental variables
         run: |
           cat << EOF > .env
 
           API_KEY=${{ env.API_KEY }}
-          THEME_ID=35c14b9c-4c25-4a10-884e-60cfd5486968
-          FUSIONAUTH_URL=http://localhost:9011/
+          THEME_ID=${{ env.THEME_ID }}
+          FUSIONAUTH_URL=${{ env.FUSIONAUTH_URL }}
           TMP_DIR=tmp
 
-          
           EOF
-
 
       - name: Display copied files
         run: |
