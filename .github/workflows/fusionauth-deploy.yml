@@ -19,7 +19,7 @@ jobs:
       - name: Checkout fusionauth-appsembler-theme
         uses: actions/checkout@v4
         with:
-          repository: ${{ github.repository }}
+          repository: jfaMan/fusionauth-theme-files-backup
           path: tmp
 
       - name: Add environmental variables
@@ -35,7 +35,6 @@ jobs:
 
       - name: Display copied files
         run: |
-          echo ${{ vars.API_KEY }}
           pwd
           ls -a
           echo '**************'
