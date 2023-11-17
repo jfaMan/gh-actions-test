@@ -32,20 +32,23 @@ jobs:
         run: |
           cat << EOF > .env
 
-          API_KEY=${{ vars.API_KEY }}
-          THEME_ID=${{ vars.THEME_ID }}
-          FUSIONAUTH_URL=${{ vars.FUSIONAUTH_URL }}
+          API_KEY=${{ vars.STAGING_API_KEY }}
+          THEME_ID=${{ vars.STAGING_THEME_ID }}
+          FUSIONAUTH_URL=${{ vars.STAGING_FUSIONAUTH_URL }}
           TMP_DIR=tmp
 
           EOF
 
-      - name: Add Node JS v20.x
+      - name: Add Node.js v20
         uses: actions/setup-node@v2
         with:
-          node-version: "20.x"
+          node-version: 20
 
       - name: Run NPM
         run: npm install
+
+      - name: Check Node version
+        run: node -v
 
       - name: Run FusionAuth Theme Helper and upload theme files to FusionAuth staging
         run: ./upload.sh
