@@ -17,7 +17,7 @@ jobs:
         run: mkdir tmp
 
       - name: Checkout fusionauth-appsembler-theme
-        uses: actions/checkout@4
+        uses: actions/checkout@v4
         with:
           repository: ${{ github.repository }}
           path: tmp
