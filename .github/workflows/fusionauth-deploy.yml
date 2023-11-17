@@ -19,3 +19,12 @@ jobs:
           ls -a  # Display copied files (optional)
           echo 'hello'
           echo 'bye'
+
+      - name: Create 'tmp' directory
+        run: mkdir tmp
+
+      - name: Display contents
+        run: |
+          pwd
+          ls -a
+          echo 'finished'
