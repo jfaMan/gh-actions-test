@@ -33,3 +33,15 @@ jobs:
 
       - name: Get the output time
         run: echo "${{ steps.hello.outputs.time }}"
+  copy_repo_contents:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          repository: FusionAuth/fusionauth-theme-helper
+          ref: main  # Modify this according to your branch name
+
+      - name: Display copied files
+        run: |
+          ls -a  # Display copied files (optional)
