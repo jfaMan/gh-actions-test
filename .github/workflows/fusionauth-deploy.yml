@@ -12,12 +12,12 @@ jobs:
     name: Deploy to Staging
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
+      - name: Checkout fusionauth-theme-helper repository
         uses: actions/checkout@v4
         with:
           repository: FusionAuth/fusionauth-theme-helper
           ref: 195b41772db95eb082853ea3211950e8c44d5397  # specific commit hash to ensure consistency
-      
+
       - name: Create 'tmp' directory for theme files
         run: mkdir tmp
 
@@ -28,7 +28,7 @@ jobs:
           token: ${{ vars.MY_PAT }}
           path: tmp
 
-      - name: Add environmental variables
+      - name: Add environment variables
         run: |
           cat << EOF > .env
 
@@ -40,7 +40,7 @@ jobs:
           EOF
 
       - name: Add Node.js v20
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: 20
 
