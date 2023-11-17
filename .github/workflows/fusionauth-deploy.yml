@@ -26,16 +26,16 @@ jobs:
         run: |
           cat << EOF > .env
 
-          API_KEY=${{ env.API_KEY }}
-          THEME_ID=${{ env.THEME_ID }}
-          FUSIONAUTH_URL=${{ env.FUSIONAUTH_URL }}
+          API_KEY=${{ vars.API_KEY }}
+          THEME_ID=${{ vars.THEME_ID }}
+          FUSIONAUTH_URL=${{ vars.FUSIONAUTH_URL }}
           TMP_DIR=tmp
 
           EOF
 
       - name: Display copied files
         run: |
-          echo "$env.API_KEY"
+          echo ${{ vars.API_KEY }}
           pwd
           ls -a
           echo '**************'
