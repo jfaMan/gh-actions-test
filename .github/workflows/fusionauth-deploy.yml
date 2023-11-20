@@ -51,8 +51,8 @@ jobs:
       - name: Check Node version
         run: node -v
 
-      # - name: Run FusionAuth Theme Helper and upload theme files to FusionAuth staging
-      #   run: ./upload.sh
+      - name: Run FusionAuth Theme Helper and upload theme files to FusionAuth staging
+        run: ./upload.sh
 
       - name: Show contents
         run: ls -a
