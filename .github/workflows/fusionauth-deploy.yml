@@ -25,9 +25,7 @@ jobs:
       - name: Checkout fusionauth-appsembler-theme
         uses: actions/checkout@v4
         with:
-          repository: jfaMan/fusionauth-theme-files-backup # original = ${{ "github.repository
-          token: ${{ secrets.MY_PAT }}
-          path: tmp
+          repository: ${{ github.repository }}
 
       - name: Add environment variables
         run: |
@@ -51,8 +49,8 @@ jobs:
       - name: Check Node version
         run: node -v
 
-      - name: Run FusionAuth Theme Helper and upload theme files to FusionAuth staging
-        run: ./upload.sh
+      # - name: Run FusionAuth Theme Helper and upload theme files to FusionAuth staging
+      #   run: ./upload.sh
 
       - name: Show contents
         run: ls -a
