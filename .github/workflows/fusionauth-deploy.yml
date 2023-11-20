@@ -11,13 +11,14 @@ jobs:
   deploy-staging:
     name: Deploy to Staging
     runs-on: ubuntu-latest
+    environment: Staging
     steps:
-      - name: Checkout repository
+      - name: Checkout fusionauth-theme-helper
         uses: actions/checkout@v4
         with:
           repository: FusionAuth/fusionauth-theme-helper
           ref: 195b41772db95eb082853ea3211950e8c44d5397  # specific commit hash to ensure consistency
-      
+
       - name: Create 'tmp' directory for theme files
         run: mkdir tmp
 
@@ -25,27 +26,39 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: jfaMan/fusionauth-theme-files-backup # original = ${{ "github.repository
-          token: ${{ vars.MY_PAT }}
+          token: ${{ secrets.MY_PAT }}
           path: tmp
 
-      - name: Add environmental variables
+      - name: Add environment variables
         run: |
           cat << EOF > .env
 
-          API_KEY=${{ vars.API_KEY }}
+          API_KEY=${{ secrets.API_KEY }}
           THEME_ID=${{ vars.THEME_ID }}
           FUSIONAUTH_URL=${{ vars.FUSIONAUTH_URL }}
           TMP_DIR=tmp
 
           EOF
 
-      - name: Add Node JS v20.x
-        uses: actions/setup-node@v2
+      - name: Add Node.js v20
+        uses: actions/setup-node@v4
         with:
-          node-version: "20.x"
+          node-version: 20
 
       - name: Run NPM
         run: npm install
 
-      - name: Run FusionAuth Theme Helper and upload theme files to FusionAuth staging
-        run: ./upload.sh
+      - name: Check Node version
+        run: node -v
+
+      # - name: Run FusionAuth Theme Helper and upload theme files to FusionAuth staging
+      #   run: ./upload.sh
+
+      - name: Show contents
+        run: ls -a
+
+# TODO: Check what branch the fusionauth-appsembler-theme is being checked out from. 
+# Might need to specify to checkout staging if it's checking out main by default
+
+# Needed to create a PAT in my GitHub profile settings with read/write access rights to be able to checkout the
+# fusionauth-theme-files repo above. Then save the PAT as an env variable in this gh-actions-test repo.
