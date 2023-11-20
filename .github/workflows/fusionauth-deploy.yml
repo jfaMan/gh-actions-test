@@ -38,16 +38,16 @@ jobs:
 
           EOF
 
-      - name: Add Node.js v20
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
+      # - name: Add Node.js v20
+      #   uses: actions/setup-node@v4
+      #   with:
+      #     node-version: 20
 
-      - name: Run NPM
-        run: npm install
+      # - name: Run NPM
+      #   run: npm install
 
-      - name: Check Node version
-        run: node -v
+      # - name: Check Node version
+      #   run: node -v
 
       # - name: Run FusionAuth Theme Helper and upload theme files to FusionAuth staging
       #   run: ./upload.sh
