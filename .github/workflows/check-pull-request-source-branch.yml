@@ -13,6 +13,6 @@ jobs:
       - name: Check branches
         run: |
           if [ ${{ github.head_ref }} != "staging" ] && [ ${{ github.base_ref }} == "main" ]; then
-            echo "Pull requests to main branch (production) are only allowed from staging branch. Change base branch to staging first and rerun the job."
+            echo "Pull requests to main branch (production) are only allowed from staging branch. Change base branch to staging and merge to staging first."
             exit 1
           fi
