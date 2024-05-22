@@ -3,7 +3,7 @@ name: FusionAuth Staging Deployment
 on:
   pull_request:
     branches:
-      - staging
+      - stagingHALTED
     types:
       - closed
 
