@@ -1,22 +1,22 @@
 name: Deploy Test
-run-name: "Deploy to ${{ github.base_ref == 'staging' && 'Staging' || 'Production' }}"
+run-name: "Deploy to ${{ github.ref == 'refs/heads/staging' && 'Staging' || 'Production' }}"
 on:
   push:
     branches:
       - staging
 
-  # pull_request:
-  #   branches:
-  #     - staging
-  #     - main
-  #   types:
-  #     - closed
+  pull_request:
+    branches:
+      - staging
+      - main
+    types:
+      - closed
 
 jobs:
   deploy:
     name: Build Theme and Deploy
     runs-on: ubuntu-latest
-    environment: ${{ github.base_ref == 'staging' && 'Staging' || 'Production' }}
+    environment: ${{ github.ref == 'refs/heads/staging' && 'Staging' || 'Production' }}
     steps:
       - name: Echo
         run: |
