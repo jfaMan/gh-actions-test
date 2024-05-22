@@ -17,7 +17,7 @@ jobs:
     name: Build Theme and Deploy
     runs-on: ubuntu-latest
     environment: ${{ github.ref == 'refs/heads/staging' && 'Staging' || 'Production' }}
-    if: github.ref == 'refs/heads/staging' || github.event_name == 'pull_request' && github.event.pull_request.merged == true
+    if: github.ref == 'refs/heads/staging' || (github.event_name == 'pull_request' && github.event.pull_request.merged == true)
     steps:
       - name: Echo
         run: |
