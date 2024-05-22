@@ -1,16 +1,16 @@
 name: Deploy Test
 run-name: "Deploy to ${{ github.base_ref == 'staging' && 'Staging' || 'Production' }}"
 on:
-  # push:
-  #   branches:
-  #     - staging
-
-  pull_request:
+  push:
     branches:
       - staging
-      - main
-    types:
-      - closed
+
+  # pull_request:
+  #   branches:
+  #     - staging
+  #     - main
+  #   types:
+  #     - closed
 
 jobs:
   deploy:
