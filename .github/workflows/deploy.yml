@@ -16,7 +16,7 @@ jobs:
   deploy:
     name: Build Theme and Deploy
     runs-on: ubuntu-latest
-    environment: ${{ github.ref == 'refs/heads/staging' && 'Staging' || 'Production' }}
+    environment: ${{ github.base_ref == 'refs/heads/staging' && 'Staging' || 'Production' }}
     steps:
       - name: Echo
         run: |
