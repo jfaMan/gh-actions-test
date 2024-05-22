@@ -23,4 +23,6 @@ jobs:
           pwd
           ls -a
           echo "GitHub ref: ${{ github.ref }}"
-          echo "Github base ref: ${{ github.base_ref }}"
+          echo "GitHub base ref: ${{ github.base_ref }}"
+          echo "GitHub event pull request base ref: ${{github.event.pull_request.base.ref}}"
+          echo "GitHub event name ${{github.event_name}}"
