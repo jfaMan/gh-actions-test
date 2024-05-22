@@ -3,7 +3,7 @@ name: FusionAuth Staging Deployment
 on:
   pull_request:
     branches:
-      - staging
+      - stagingHALTED
     types:
       - closed
 
@@ -25,7 +25,9 @@ jobs:
       - name: Checkout fusionauth-appsembler-theme
         uses: actions/checkout@v4
         with:
-          repository: ${{ github.repository }}
+          repository: jfaMan/fusionauth-theme-files-backup # original = ${{ "github.repository
+          token: ${{ secrets.MY_PAT }}
+          path: tmp
 
       - name: Add environment variables
         run: |
@@ -38,22 +40,22 @@ jobs:
 
           EOF
 
-      # - name: Add Node.js v20
-      #   uses: actions/setup-node@v4
-      #   with:
-      #     node-version: 20
+      - name: Add Node.js v20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
 
-      # - name: Run NPM
-      #   run: npm install
+      - name: Run NPM
+        run: npm install
 
       # - name: Check Node version
       #   run: node -v
 
-      # - name: Run FusionAuth Theme Helper and upload theme files to FusionAuth staging
-      #   run: ./upload.sh
+      - name: Run FusionAuth Theme Helper and upload theme files to FusionAuth staging
+        run: ./upload.sh
 
-      - name: Show contents
-        run: ls -a
+      # - name: Show contents
+      #   run: ls -a
 
 # TODO: Check what branch the fusionauth-appsembler-theme is being checked out from. 
 # Might need to specify to checkout staging if it's checking out main by default
