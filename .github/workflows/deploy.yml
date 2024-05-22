@@ -1,5 +1,5 @@
 name: Deploy Test
-run-name: "Deploy to ${{ github.ref == 'refs/heads/staging' && 'Staging' || 'Production' }}"
+run-name: "Deploy to ${{ github.base_ref == 'staging' && 'Staging' || 'Production' }}"
 on:
   # push:
   #   branches:
