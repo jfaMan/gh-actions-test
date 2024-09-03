@@ -1,0 +1,56 @@
+name: Deploy to FusionAuth
+run-name: "Deploy to ${{ github.ref == 'refs/heads/staging' && 'Staging' || 'Production' }}"
+on:
+  push:
+    branches:
+      - staging
+
+  pull_request:
+    branches:
+      - main
+    types:
+      - closed
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    environment: ${{ github.ref == 'refs/heads/staging' && 'Staging' || 'Production' }}
+    if: github.ref == 'refs/heads/staging' || (github.event.pull_request && github.event.pull_request.merged)
+    steps:
+      - name: Checkout fusionauth-theme-helper
+        uses: actions/checkout@v4
+        with:
+          repository: FusionAuth/fusionauth-theme-helper
+          ref: 195b41772db95eb082853ea3211950e8c44d5397  # specific commit hash to ensure consistency
+
+      - name: Create 'tmp' directory for theme files
+        run: mkdir tmp
+
+      - name: Checkout fusionauth-appsembler-theme
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ github.repository }}
+          path: tmp
+
+      - name: Add environment variables
+        run: |
+          cat << EOF > .env
+
+          API_KEY=${{ secrets.API_KEY }}
+          THEME_ID=${{ vars.THEME_ID }}
+          FUSIONAUTH_URL=${{ vars.FUSIONAUTH_URL }}
+          TMP_DIR=tmp/theme-templates
+
+          EOF
+
+      - name: Add Node.js v20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Node dependencies
+        run: npm install
+
+      - name: Run FusionAuth Theme Helper and upload theme files to FusionAuth
+        run: ./upload.sh
