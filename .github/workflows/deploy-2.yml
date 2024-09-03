@@ -50,7 +50,9 @@ jobs:
           node-version: 20
 
       - name: Install Node dependencies
-        run: npm install
+        run: |
+          cd tmp
+          yarn install
 
       - name: Run script to upload theme files to FusionAuth
-        run: ./upload.sh
+        run: ./tmp/upload.sh
