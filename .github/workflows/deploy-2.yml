@@ -18,11 +18,11 @@ jobs:
     environment: ${{ github.ref == 'refs/heads/staging' && 'Staging' || 'Production' }}
     if: github.ref == 'refs/heads/staging' || (github.event.pull_request && github.event.pull_request.merged)
     steps:
-      - name: Checkout fusionauth-theme-helper
-        uses: actions/checkout@v4
-        with:
-          repository: FusionAuth/fusionauth-theme-helper
-          ref: 195b41772db95eb082853ea3211950e8c44d5397  # specific commit hash to ensure consistency
+      # - name: Checkout fusionauth-theme-helper
+      #   uses: actions/checkout@v4
+      #   with:
+      #     repository: FusionAuth/fusionauth-theme-helper
+      #     ref: 195b41772db95eb082853ea3211950e8c44d5397  # specific commit hash to ensure consistency
 
       - name: Create 'tmp' directory for theme files
         run: mkdir tmp
@@ -52,5 +52,5 @@ jobs:
       - name: Install Node dependencies
         run: npm install
 
-      - name: Run FusionAuth Theme Helper and upload theme files to FusionAuth
+      - name: Run script to upload theme files to FusionAuth
         run: ./upload.sh
