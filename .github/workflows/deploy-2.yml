@@ -18,20 +18,10 @@ jobs:
     environment: ${{ github.ref == 'refs/heads/staging' && 'Staging' || 'Production' }}
     if: github.ref == 'refs/heads/staging' || (github.event.pull_request && github.event.pull_request.merged)
     steps:
-      # - name: Checkout fusionauth-theme-helper
-      #   uses: actions/checkout@v4
-      #   with:
-      #     repository: FusionAuth/fusionauth-theme-helper
-      #     ref: 195b41772db95eb082853ea3211950e8c44d5397  # specific commit hash to ensure consistency
-
-      # - name: Create 'tmp' directory for theme files
-      #   run: mkdir tmp
-
       - name: Checkout fusionauth-appsembler-theme
         uses: actions/checkout@v4
         with:
           repository: ${{ github.repository }}
-          # path: tmp
 
       - name: Add environment variables
         run: |
@@ -40,7 +30,7 @@ jobs:
           API_KEY=${{ secrets.API_KEY }}
           THEME_ID=${{ vars.THEME_ID }}
           FUSIONAUTH_URL=${{ vars.FUSIONAUTH_URL }}
-          TMP_DIR=theme-templates
+          THEME_DIR=theme-templates
 
           EOF
 
