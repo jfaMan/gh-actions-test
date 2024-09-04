@@ -1,5 +1,5 @@
-name: Deploy to FusionAuth
-run-name: "Deploy to ${{ github.ref == 'refs/heads/staging' && 'Staging' || 'Production' }}"
+name: Deploy Theme to FusionAuth
+run-name: "Deploy theme to ${{ github.ref == 'refs/heads/staging' && 'Staging' || 'Production' }}"
 on:
   push:
     branches:
@@ -13,7 +13,7 @@ on:
 
 jobs:
   deploy:
-    name: Deploy (updated)
+    name: Deploy theme
     runs-on: ubuntu-latest
     environment: ${{ github.ref == 'refs/heads/staging' && 'Staging' || 'Production' }}
     if: github.ref == 'refs/heads/staging' || (github.event.pull_request && github.event.pull_request.merged)
@@ -30,7 +30,6 @@ jobs:
           API_KEY=${{ secrets.API_KEY }}
           THEME_ID=${{ vars.THEME_ID }}
           FUSIONAUTH_URL=${{ vars.FUSIONAUTH_URL }}
-          THEME_DIR=theme-templates
 
           EOF
 
@@ -43,4 +42,4 @@ jobs:
         run: yarn install
 
       - name: Run script to upload theme files to FusionAuth
-        run: ./upload.sh
+        run: ./upload-theme.sh
