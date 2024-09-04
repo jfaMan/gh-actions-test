@@ -1,0 +1,49 @@
+name: Deploy Theme to FusionAuth
+run-name: "Deploy theme to ${{ github.ref == 'refs/heads/staging' && 'Staging' || 'Production' }}"
+on:
+  push:
+    branches:
+      - staging
+    paths:
+    - 'templates/theme/**'
+
+  pull_request:
+    branches:
+      - main
+    paths:
+    - 'templates/theme/**'
+    types:
+      - closed
+
+jobs:
+  deploy:
+    name: Deploy theme
+    runs-on: ubuntu-latest
+    environment: ${{ github.ref == 'refs/heads/staging' && 'Staging' || 'Production' }}
+    if: github.ref == 'refs/heads/staging' || (github.event.pull_request && github.event.pull_request.merged)
+    steps:
+      - name: Checkout fusionauth-appsembler-theme
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ github.repository }}
+
+      - name: Add environment variables
+        run: |
+          cat << EOF > .env
+
+          API_KEY=${{ secrets.API_KEY }}
+          THEME_ID=${{ vars.THEME_ID }}
+          FUSIONAUTH_URL=${{ vars.FUSIONAUTH_URL }}
+
+          EOF
+
+      - name: Add Node.js v20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Node dependencies
+        run: yarn install
+
+      - name: Run script to upload theme files to FusionAuth
+        run: ./scripts/upload-theme.sh
